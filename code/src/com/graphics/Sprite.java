@@ -6,6 +6,7 @@ import com.ingame.Game;
 
 public class Sprite 
 {
+	// instancia as imagens que são usadas no game
 	public static BufferedImage[] tile;	
 	public static BufferedImage[] playerSprite;
 	public static BufferedImage[] enemySprite = new BufferedImage[1];

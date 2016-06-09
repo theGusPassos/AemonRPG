@@ -32,6 +32,8 @@ public class LoadImages implements Runnable
 	static BufferedImage startSprite;
 	public static BufferedImage pcSprites[] = new BufferedImage[3];
 	
+	//carrega todos os recursos de imagem que estão em /res
+	
 	public LoadImages() throws IOException
 	{
 		//new Sprite();

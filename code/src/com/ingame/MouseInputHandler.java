@@ -37,6 +37,7 @@ public class MouseInputHandler implements  MouseListener
 	@Override
 	public void mousePressed(MouseEvent arg0) 
 	{
+		//posição do mouse na tela
 		Point loc = MouseInfo.getPointerInfo().getLocation();
 		double x = loc.getX();
 		double y = loc.getY();
@@ -88,6 +89,7 @@ public class MouseInputHandler implements  MouseListener
 				}
 			}
 			
+			//passa a ação que o jogador escolheu e o inimigo que ele selecionou
 			for(int i = 0; i < 3; i++)
 			{
 				if(x > Battle.enemyMainX + Battle.xSize[i] && x < Battle.enemyMainX + Battle.xSize[i] + Battle.enemySpriteSize && y > Battle.enemyMainY + Battle.ySize[i] && y < Battle.enemyMainY + Battle.ySize[i] + Battle.enemySpriteSize)
@@ -105,7 +107,7 @@ public class MouseInputHandler implements  MouseListener
 				{
 					Battle.stopBattle(1);
 					
-					MusicThread.gVolume = -1000;
+					MusicThread.gVolume = -30;
 					MusicThread.themeTimer = System.currentTimeMillis();
 
 				}

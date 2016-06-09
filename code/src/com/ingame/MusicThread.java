@@ -17,6 +17,7 @@ public class MusicThread implements Runnable
 	static Clip bClip;
 	static Clip gClip;
 	
+	//carrega os arq de musica
 	static File battleFile = new File("res/Sounds/battleTheme.wav");
 	static File gameThemeFile = new File("res/Sounds/gametheme.wav");
 	
@@ -25,7 +26,7 @@ public class MusicThread implements Runnable
 	static boolean playingTheme = false;
 	
 	static float bVolume = -50;
-	public static float gVolume = -40;
+	public static float gVolume = -30;
 	
 	static long musicTimer;
 	public static long themeTimer;
@@ -38,6 +39,7 @@ public class MusicThread implements Runnable
 			e1.printStackTrace();
 		}
 		
+		//controlando o volume e momento que cada musica vai tocar:
 		while(Game.running)
 		{
 			if(!StartBattle.startingBattle && !Battle.inBattle && playingBattle)
@@ -57,9 +59,9 @@ public class MusicThread implements Runnable
 			}
 			
 			// increase battle theme volume
-			if(bVolume < -5 && StartBattle.startingBattle)
+			if(bVolume < 0 && StartBattle.startingBattle)
 			{
-				bVolume+=0.01;
+				bVolume+=0.1;
 				
 				FloatControl gainControl = 
 					    (FloatControl) bClip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -67,7 +69,7 @@ public class MusicThread implements Runnable
 			}
 			
 			//increase game theme volume
-			if(!StartBattle.startingBattle&& !StartMenu.inStartMenu && gVolume < -30 && System.currentTimeMillis() > themeTimer + 20)
+			if(!StartBattle.startingBattle&& !StartMenu.inStartMenu && gVolume < 0 && System.currentTimeMillis() > themeTimer + 20)
 			{
 				gVolume+=0.01;
 								
@@ -103,7 +105,7 @@ public class MusicThread implements Runnable
 			
 		
 	}
-	
+	//starta os clips
 	static void startClips() throws LineUnavailableException, IOException, UnsupportedAudioFileException
 	{
 		gClip = AudioSystem.getClip();
@@ -114,7 +116,8 @@ public class MusicThread implements Runnable
 		
 		
 	}
-	
+	//muda o volume, 6 = max.
+	//inicia com valor negativo para incrementar com o tempo após o início do game
 	static void playSound(float volume, Clip clip)
 	{	
 		try {

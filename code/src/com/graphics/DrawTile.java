@@ -22,6 +22,7 @@ public class DrawTile
 	
 	private static int image;
 	
+	 //inicia cada tile
 	public DrawTile(int x, int y, int tileId, Game game)
 	{
 		this.oX = x;
@@ -32,6 +33,7 @@ public class DrawTile
 		
 	}
 	
+	//atualiza a posição de cada tile
 	public void tick(Game game)
 	{
 		this.game = game;
@@ -42,6 +44,7 @@ public class DrawTile
 		bounding.setBounds(x, y, Game.tileSize, Game.tileSize);
 	}
 	
+	//renderiza cada tile
 	public void render(Graphics g, int i, int j)
 	{
 		image = tileId;

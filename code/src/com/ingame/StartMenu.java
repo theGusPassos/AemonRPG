@@ -35,6 +35,8 @@ public class StartMenu
 		
 		long start = System.currentTimeMillis();  //374
 		
+		//starta estas threads para dar load nos recursos
+		
 		Thread loadCharacters = new Thread(new LoadCharacters());
 		Thread loadImages = new Thread(new LoadImages());
 		Thread loadMap = new Thread(new LoadMap());
@@ -43,7 +45,9 @@ public class StartMenu
 		loadCharacters.start();
 		loadMap.start();
 		
-		try {
+		// espera o término de cada uma para ter continuidade no código
+		try 
+		{
 			loadImages.join();
 			loadMap.join();
 			loadCharacters.join();
@@ -53,12 +57,14 @@ public class StartMenu
 			e.printStackTrace();
 		}
 		
+		//tempo de espera para que todas as threads carreguem, =~ 300ms
 		System.out.printf("Tempo de espera: ");
 		System.out.println(System.currentTimeMillis() - start);
 		
 		
 	}
 	
+
 	static void startGame() throws IOException
 	{
 		long startTime = System.currentTimeMillis();

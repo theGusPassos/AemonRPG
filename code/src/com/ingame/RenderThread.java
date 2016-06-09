@@ -4,8 +4,8 @@ import java.awt.Graphics;
 
 public class RenderThread implements Runnable
 {
+	//apenas um teste, não é possível utilizar Graphics em thread
 	Graphics g;
-
 	public void run() 
 	{
 		

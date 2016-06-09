@@ -35,7 +35,7 @@ public class StartBattle
 			if(System.currentTimeMillis() - battleTimer > 3000 && !Battle.inBattle)
 			{
 				r = rand.nextInt(100);
-				System.out.println("testou " + r);
+				//System.out.println("testou " + r);
 				
 				if(r < chanceToBattle && !startingBattle && !Battle.inBattle)
 				{				

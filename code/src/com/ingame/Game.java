@@ -30,6 +30,7 @@ public class Game extends Canvas implements Runnable
 	
 	Graphics g;
 	
+	//core vars
 	public static final String GAMETITLE = " Aemon ";
 	public static final int MAXMAPS = 2;
 	public static final int MAXENEMIES = 1;
@@ -37,21 +38,29 @@ public class Game extends Canvas implements Runnable
 	public static final int tileSize = 64;
 	public static boolean running = false;
 	
+	//game main thread
 	private static Thread thread;
 	
+	// faz a aniamação da personagem
 	private static Thread logicThread;
+	//o som do game
 	private static Thread soundThread;
+	// a musica do game
 	private static Thread musicThread;
 
+	
+	//tamanho da tela
 	public static double width;
 	public static double height;
 
 	private static int fps = 0;	
 	private static long timer = System.currentTimeMillis();
 	
+	//deslocamento do mapa
 	public int xOffset;
 	public int yOffset;
 	
+	//black image behind the scene
 	BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	JFrame frame;
 	
@@ -61,14 +70,18 @@ public class Game extends Canvas implements Runnable
 	
 	//map
 
+	//array do mapa
 	DrawTile tileArray[][];
 	public static int currentMap = 1;
 	
+	// input handlers, de mouse e teclado
 	InputHandler inputHandler = new InputHandler();
 	MouseInputHandler mouseHandler = new MouseInputHandler();
 	
+	//variaveis da personagem que aparece na tela
 	Player player = new Player(this);
 	
+	//alpha do titulo do game, varia no menu inicial
 	static int titleAlpha = 0;
 	static boolean shouldInc = true;
 	
@@ -76,26 +89,31 @@ public class Game extends Canvas implements Runnable
 	public void run() 
 	{
 		// control fps
+		//faz o game rodar a 60fps
 		long lastTime = System.nanoTime();
 		long now;
 		double delta = 0;
 		
+		//enquanto estiver em game:
 		while(running)
 		{
 			now = System.nanoTime();
 			delta += (now - lastTime) / FPS;
 			lastTime = now;
 			
+			//inicia a thread que muda os sprites da personagem
 			if(logicThread == null)
 			{
 				logicThread = new Thread(new AnimationThread());
 				logicThread.start();
 			}
+			//inicia a thread que carrega os sons do game
 			if(soundThread == null)
 			{ 
 				soundThread = new Thread(new SoundThread());
 				soundThread.start();
 			}
+			//inicia a thread que carrega as músicas do game
 			if(musicThread == null)
 			{
 				musicThread = new Thread(new MusicThread());
@@ -105,11 +123,14 @@ public class Game extends Canvas implements Runnable
 			
 			while(delta >= 1)
 			{
+				//atualiza a posição dos tiles
 				tick();
+				//renderiza as novas posições
 				render();
 				
 				//System.out.println("x" + xOffset + "y> " + yOffset);
 
+				//testa colisões
 				collisionTest();
 			
 				fps++;
@@ -153,12 +174,16 @@ public class Game extends Canvas implements Runnable
 	 */
 	public Game(int map)
 	{
+		//pega o tamanho da tela
 		GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 		
+		//seta as dimensões para rodar full screen
 		setDimensionInScreen();
 		
-		
+		//carrega o current map
 		loadMap(map);
+		
+		//criando o jframe
 		
 		frame = new JFrame(GAMETITLE);
 		
@@ -172,11 +197,13 @@ public class Game extends Canvas implements Runnable
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
+		//add os listener no frame / canvas
 		this.addKeyListener(inputHandler);	
 		this.addMouseListener(mouseHandler);
 		
 		device.setFullScreenWindow(frame);
 		
+		//carrega os personagens da party
 		Party.startParty();
 		
 		init();
@@ -229,6 +256,12 @@ public class Game extends Canvas implements Runnable
 	
 	/**
 	 * Draw the map again with the x and y Offset
+	 * 
+	 * O offset move o mapa, como a personagem permanece no centro da tela e o mapa muda de posição, existe a impressão que ela está
+	 * se movendo.
+	 * 
+	 * Todos tiles recebem os valores do offset, e o offset inicial é setado no .txt relativo ao mapa
+	 * 
 	 */
 	private void tick()
 	{
@@ -251,7 +284,7 @@ public class Game extends Canvas implements Runnable
 	 */
 	private void render()
 	{
-		// Learn this
+		// usa bufferstrategy para desenhar na tela
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null)
 		{
@@ -263,7 +296,9 @@ public class Game extends Canvas implements Runnable
 			
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 			
-			//startMenu
+			/*
+			 * Desenha o menu inicial 
+			 */
 			if(StartMenu.inStartMenu)
 			{
 				g.setColor(Color.white);
@@ -279,6 +314,7 @@ public class Game extends Canvas implements Runnable
 					
 				}
 				
+				//altera o alpha do titulo do game
 				if(shouldInc)
 					titleAlpha++;
 				else
@@ -321,13 +357,14 @@ public class Game extends Canvas implements Runnable
 				Status.drawStatusScreen(g);
 			}
 
+			//desenha tudo na tela
 			g.dispose();
 			bs.show();
 
 	}
 	
 	/**
-	 * Render the map
+	 * Render the map array
 	 */
 	void renderMap()
 	{
@@ -346,6 +383,8 @@ public class Game extends Canvas implements Runnable
 	
 	/**
 	 * Draw game status in the screen
+	 * 
+	 * é ver na tela do jogo o fps ou deslocamento atual ao clicar determinados botões
 	 */
 	void showGameStatus()
 	{
@@ -360,6 +399,8 @@ public class Game extends Canvas implements Runnable
 	
 	/**
 	 * moves the map so the player appears to be moving
+	 * 
+	 * add o offset de acordo com a velocidade da personagem
 	 */
 	private void movePlayer()
 	{

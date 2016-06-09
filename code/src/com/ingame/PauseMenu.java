@@ -12,6 +12,8 @@ public class PauseMenu
 	
 	public PauseMenu(Graphics g, Player player)
 	{
+		//desenha o pause menu
+		
 		//the player can't move in the pause menu
 		Player.stopPlayer();
 		

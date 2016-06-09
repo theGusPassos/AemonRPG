@@ -1,6 +1,7 @@
 package com.battle;
 
 import com.controller.Party;
+import com.ingame.Game;
 
 public class StatusRegenController
 {
@@ -9,6 +10,8 @@ public class StatusRegenController
 	{
 		if(start == 0)
 			start = System.currentTimeMillis();
+		
+		//add status a cada 1 segundo
 		
 		if(System.currentTimeMillis() - start > 1000)
 		{
@@ -37,4 +40,5 @@ public class StatusRegenController
 			start += 1000;
 		}
 	}
+	
 }

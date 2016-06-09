@@ -18,7 +18,9 @@ import com.menus.Status;
 
 public class Battle
 {
+	//thread que testa a posição do mouse
 	static Thread menuAnimations;
+	//static Thread statusRegen;
 	
 	public static Enemy[] currentEnemies = new Enemy[3];
 	public static float enemyCurrentHP[] = new float[3]; 
@@ -69,6 +71,7 @@ public class Battle
 			menuAnimations = new Thread(new MenuAnimations());
 			menuAnimations.start();
 		}
+		
 		
 		MenuAnimations.shouldReset = true;
 		

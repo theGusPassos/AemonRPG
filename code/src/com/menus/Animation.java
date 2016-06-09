@@ -22,7 +22,9 @@ public class Animation
 	
 	static void testMouse()
 	{
-
+		//animação do mouse no menu de status
+		
+		//posição do mouse
 		Point loc = MouseInfo.getPointerInfo().getLocation();
 		double x = loc.getX();
 		double y = loc.getY();

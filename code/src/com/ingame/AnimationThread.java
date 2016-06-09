@@ -1,18 +1,18 @@
 package com.ingame;
 
+import com.battle.Battle;
 import com.battle.StartBattle;
 
 public class AnimationThread implements Runnable
 {
-
 	private static int pos = 0;
-
 	private static long lastTime = 0;
 	private static long now;
 	
-	
+	//As variáveis são relativas à imagem que está aparecendo neste momento
 	public static int currentSprite = 0;
 
+	//cada array contém os sprites relativos para esta direção
 	private static int left[] = {10, 6, 10, 2};
 	private static int right[] = {1, 5, 1, 9};
 	private static int up[] = {3, 7, 3, 11};
@@ -23,7 +23,8 @@ public class AnimationThread implements Runnable
 	{
 		while(Game.running)
 		{
-			if(!StartBattle.startingBattle)
+			// não é possivel mudar de sprite na batalha, ou quando ela está iniciando
+			if(!StartBattle.startingBattle && !Battle.inBattle)
 			{
 				//Animation.changeSprite();
 			
@@ -48,6 +49,7 @@ public class AnimationThread implements Runnable
 		}
 	}
 	
+	//muda os sprites de forma a repetir o vetor quando chegar no final
 	public static void changeSprite()
 	{		
 		if(Player.left)

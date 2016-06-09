@@ -20,6 +20,7 @@ public class InputHandler implements KeyListener
 	{
 		int keyCode = k.getKeyCode();
 		
+		//pega o input no game, para mover o mapa
 		if(!showMenu && !StartMenu.inStartMenu)
 		{
 			//player movement
@@ -45,6 +46,9 @@ public class InputHandler implements KeyListener
 		// battle input
 		if(Battle.inBattle)
 		{			
+			
+			//W e S trocam o personagem selecionado na batalha
+			
 			if(keyCode == KeyEvent.VK_W)
 			{
 				if(Battle.selectedChar < 2)
@@ -94,7 +98,7 @@ public class InputHandler implements KeyListener
 				
 		}
 		
-		
+		//muda a opção selecionada no menu inicial
 		if(StartMenu.inStartMenu)
 		{
 			if(keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP)
@@ -130,6 +134,8 @@ public class InputHandler implements KeyListener
 	@Override
 	public void keyReleased(KeyEvent k) 
 	{
+		//para o personagem se o jogador não pressionar mais nada.
+		
 		int keyCode = k.getKeyCode();
 		
 		if(keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT)
@@ -148,6 +154,7 @@ public class InputHandler implements KeyListener
 		
 	}
 	
+	//o que acontece quando o jogador aperta Enter, de acordo com a opção selecionada no menu inicial
 	private static void menuAction(int option)
 	{
 		switch(option)

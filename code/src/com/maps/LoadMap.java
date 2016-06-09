@@ -43,6 +43,8 @@ public class LoadMap implements Runnable
 		while(loadedMap < Game.MAXMAPS)
 		{
 			
+			// carrega o .txt do mapa
+			
 			fileName = "";
 			fileName = "res/Maps/map" + String.valueOf(loadedMap) + ".txt";
 			File file = new File(fileName);

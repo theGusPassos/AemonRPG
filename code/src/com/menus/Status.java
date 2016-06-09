@@ -18,6 +18,9 @@ public class Status
 	
 	static int blueColor = 100;
 	
+	
+	//desenha o menu de status
+	
 	public static void drawStatusScreen(Graphics g)
 	{
 		Animation.testMouse();

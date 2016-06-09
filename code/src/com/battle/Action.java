@@ -8,13 +8,21 @@ import com.ingame.SoundThread;
 
 public class Action 
 {
+	//ação em batalha
 	
+	//quanto de stamina se usa em cada ação
 	static float staminaUsage[] = {40f, 70f};
 	
 	static boolean defPos[] = {false, false, false};
 	
+	//timer do ataque dos inimigos
 	static long start[] = {System.currentTimeMillis() + 1000, System.currentTimeMillis() + 2000, System.currentTimeMillis() + 3000};
 	
+	//random para saber quem o inimigo ataca
+	
+	/*TODO:
+	 * 	Adicionar método que procura o personagem com menor vida, testar uma espécie de IA
+	 */
 	static Random rand = new Random();
 	
 	public static void chooseAction(int action, int enemy)
@@ -125,6 +133,7 @@ public class Action
 		
 	}
 	
+	//permite o desenho de dano na tela, o número que sobe no inimigo ou personagem:
 	private static void allowDamageTakenDrawing(int pChar, float damage)
 	{
 		MenuAnimations.charDamage[pChar] = true;
@@ -147,6 +156,7 @@ public class Action
 		MenuAnimations.yRandom[enemy] = rand.nextInt(Battle.enemySpriteSize);
 	}
 	
+	//tipos de ataque que o inimigo pode fazer
 	private static int atkTypeEnemy(int type)
 	{
 		int n = 0;
@@ -158,6 +168,7 @@ public class Action
 		return n;
 	}
 	
+	// cálculo do dano de acordo com as var do atacante e defensor
 	private static float damage(float atk, float acc, float cri, float def, float dod)
 	{
 		float d;
@@ -169,6 +180,7 @@ public class Action
 		return d;
 	}
 	
+	//para que o desenho das barras não fique negativo
 	static void fixHP()
 	{
 		for(int i = 0; i < 3; i++)

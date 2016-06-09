@@ -21,6 +21,8 @@ public class SoundThread implements Runnable
 	public static boolean hurtShield = false;
 	public static boolean selectAtk = false;
 	
+	//arquivos de música .wav
+	
 	File stepFile = new File("res/Sounds/step.wav");
 	
 	File atkFile = new File("res/Sounds/bloody blade.wav");
@@ -31,8 +33,9 @@ public class SoundThread implements Runnable
 			
 	File buttonFile = new File("res/Sounds/button.wav");
 
-	
+	//se estiver andando, roda os sons de passos
 	static boolean walking;
+	//delay nos sons para não acontecer mt rápido
 	static long walkSoundTimer = System.currentTimeMillis();
 	
 	public void run()
@@ -41,7 +44,7 @@ public class SoundThread implements Runnable
 		while(Game.running)
 		{
 			
-		
+			//roda o som dos passos caso andar
 			if(!StartBattle.startingBattle && !Status.inStatusMenu && !Battle.inBattle)
 			{
 				
@@ -52,47 +55,49 @@ public class SoundThread implements Runnable
 			
 				if(walking && System.currentTimeMillis() - walkSoundTimer > 600)
 				{
-					playSound(stepFile, -30);
+					playSound(stepFile, 0);
 					walkSoundTimer+=600;
 				}
 					
 			}
 			
+			//sons da batalha: 
 			if(Battle.inBattle)
 			{
 				if(MenuAnimations.changingChars)
 				{
-					playSound(buttonFile, -30);
+					playSound(buttonFile, 0);
 				}
 				
 				if(damage)
 				{
-					playSound(atkFile, -45);
+					playSound(atkFile, -10);
 					damage = false;
 				}
 				
 				if(deffense)
 				{
-					playSound(shieldFile, -15);
+					playSound(shieldFile, 0);
 					deffense = false;
 				}
 				if(selectAtk)
 				{
-					playSound(removeSwordFile, -25);
+					playSound(removeSwordFile, 0);
 					selectAtk = false;
 				}
 				if(hurtShield)
 				{
-					playSound(shieldImpactFile, -30);
+					playSound(shieldImpactFile, 0);
 					hurtShield = false;
 				}
 				if(hurt)
 				{
-					playSound(hurtFile, -50);
+					playSound(hurtFile, 0);
 					hurt = false;
 				}
 			}
 			
+			//timer do som de passos
 			if(System.currentTimeMillis() - walkSoundTimer > 600)
 			{
 				walkSoundTimer+=600;
@@ -107,6 +112,7 @@ public class SoundThread implements Runnable
 		
 	}
 	
+	//roda o clip.
 	public static void playSound(File soundFile, float volume)
 	{	
 		try {

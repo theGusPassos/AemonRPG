@@ -5,6 +5,8 @@ import com.characters.PlayableCharacter;
 
 public class Party 
 {
+	//atual party no game
+	//party = personagens que acompanham a main character no game
 	public static PlayableCharacter currentParty[] = new PlayableCharacter[3];
 	public static int numberOfPC = 3;
 	

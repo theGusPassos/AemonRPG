@@ -233,7 +233,7 @@ public class LoadCharacters implements Runnable
 		}
 		
 	}
-	
+	//separa a string retirada do txt para receber apenas o número
 	private static String splitString(String string)
 	{
 		String s[] = string.split(":");

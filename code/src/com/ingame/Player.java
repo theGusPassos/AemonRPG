@@ -46,7 +46,7 @@ public class Player
 		x = (game.getWidth() / 2) - 16;
 		y = (game.getHeight() / 2) - 16;
 		
-
+		//seta onde a colisão será
 		playerAreaUp = new Rectangle(x + 5, y + 32, 56, 10);
 		playerAreaUp.setBounds(x + 5, y + 32, 56, 10);
 		
@@ -69,6 +69,8 @@ public class Player
 		//g.drawRect(x - 20, y + 10, 30, (48 * 2) - 32);
 		//as rects
 		
+		//apenas teste para ver onde as colisões acontecem:
+		
 		/*
 		g.drawRect(x + 5, y - 8, 56, 10);
 		g.drawRect(x + 5, y + 90, 54, 10);
@@ -86,6 +88,7 @@ public class Player
 		*/
 	}
 	
+	//para o jogador
 	public static void stopPlayer()
 	{
 		canDown = false;
@@ -98,7 +101,8 @@ public class Player
 	 * Reset the vars so the player can move
 	 */
 	void resetVar()
-	{
+	{	
+		//quando o personagem sair do menu, pode se mover
 		if(!InputHandler.showMenu && !StartBattle.startingBattle && !Battle.inBattle)
 		{
 			canRight = true;
